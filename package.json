@@ -1,0 +1,37 @@
+{
+  "name": "kortjs",
+  "version": "0.1.0",
+  "description": "The 4KB slippy map",
+  "type": "module",
+  "main": "web-component/dist/kortjs.js",
+  "module": "web-component/dist/kortjs.js",
+  "unpkg": "web-component/dist/kortjs.min.js",
+  "files": [
+    "web-component/dist/"
+  ],
+  "scripts": {
+    "develop": "node web-component/scripts/develop.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DLFDK/kortjs.git"
+  },
+  "keywords": [
+    "map",
+    "web component",
+    "slippy map",
+    "tile map"
+  ],
+  "author": "Dennis Frederiksen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DLFDK/kortjs/issues"
+  },
+  "homepage": "https://github.com/DLFDK/kortjs#readme",
+  "devDependencies": {
+    "browser-sync": "^2.27.7",
+    "chokidar": "^3.5.3",
+    "sass": "^1.49.9",
+    "terser": "^5.12.0"
+  }
+}
