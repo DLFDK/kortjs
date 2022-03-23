@@ -17,7 +17,7 @@ Current version (0.1.0) focuses on a location-picker use case. See specifics bel
 Include the script in your html:
 
 ```
-<script type="module" src="unpkg"></script>
+<script type="module" src="https://unpkg.com/kortjs@0.1.0/web-component/dist/kortjs.min.js"></script>
 ```
 
 Add the markup:
