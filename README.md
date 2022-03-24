@@ -30,6 +30,13 @@ Add the markup:
 
 That's it - you got a working slippy map!
 
+<br>
+
+_Also available on npm:_
+```
+npm install kortjs
+```
+
 ## :gear: Customization
 
 The slippy map is customized with data-attributes and slotted elements - no Javascript needed!
