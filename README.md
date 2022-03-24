@@ -275,7 +275,7 @@ kort-js {
 ### **_Attribution slot-elements_**
 
 The content provided to the attribution-text slot-element can be styled as normal with a class, id etc. or by targeting the `slot="attribution-text"` attribute directly.
-The container, in which the attribution-text slot-element sits, must be styled with the `::part("attribution-container)` pseudo-element. The name of the part is set by Kortjs and cannot be changed. Minimal default styling is provided by Kortjs.
+The container, in which the attribution-text slot-element sits, must be styled with the `::part("attribution-container")` pseudo-element. The name of the part is set by Kortjs and cannot be changed. Minimal default styling is provided by Kortjs.
 
 The content provided to the attribution-icon slot-element can be styled as normal with a class, id etc. or by targeting the `slot="attribution-icon"` attribute directly. No default styling is provided for this element.
 
