@@ -467,8 +467,6 @@ export default class kortjs extends HTMLElement {
                             pinch(frameTime, pinchStartDistance);
                         });
                         break;
-                    default:
-                        console.log("Ignoring input");
                 }
             }
             function pointerMove(event) {
@@ -500,8 +498,6 @@ export default class kortjs extends HTMLElement {
                             });
                         }
                     }
-                } else {
-                    console.log("Ignoring input");
                 }
             }
             function drag(time, previousTime, previousX, previousY) {
