@@ -204,7 +204,7 @@ To specify a starting location, set the following attributes on the main kortjs-
 -   `data-set-zoom`
 
 <details>
-    <summary>Example - New Your City as starting location</summary> 
+    <summary>Example - New York City as starting location</summary> 
     
 ````
 <kort-js 
@@ -378,7 +378,7 @@ button.addEventListener("click", () => {
 
 In Chromium-based browsers, fetch-requests made by a worker spawned using a blob-url will not include a referer header. The worker in Kortjs is spawned this way.
 
-The missing referer header can lead to some tile-servers blocking the requests. Most notably the Open Street Maps tile-server uses the referer header to throttle incoming requests and blacklists clients if usage is deemed outside of the provided guidelines. Due to the missing referer header, requests from different clients may be seen as coming from just one, increasing the risk of getting blacklisted.
+The missing referer header can lead to some tile-servers blocking the requests. Most notably the OpenStreetMaps tile-server uses the referer header to throttle incoming requests and blacklists clients if usage is deemed outside of the provided guidelines. Due to the missing referer header, requests from different clients may be seen as coming from just one, increasing the risk of getting blacklisted.
 
 [Chromium bug report](https://bugs.chromium.org/p/chromium/issues/detail?id=580900#c_ts1647412445)
 
