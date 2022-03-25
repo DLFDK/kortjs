@@ -5,7 +5,7 @@ export default class kortjs extends HTMLElement {
         const config = (() => {
             const url = kortjs.dataset.url.replace("${id}", kortjs.dataset.id).replace("${token}", kortjs.dataset.token);
             const tilesize = kortjs.dataset.tilesize ? parseInt(kortjs.dataset.tilesize) : 256;
-            
+
             const minZoomLevel = kortjs.dataset.minzoom ? parseInt(kortjs.dataset.minzoom) : 0;
             const maxZoomLevel = kortjs.dataset.maxzoom ? parseInt(kortjs.dataset.maxzoom) : 19;
 
@@ -25,7 +25,7 @@ export default class kortjs extends HTMLElement {
                 return [zoomLevel, longitude, latitude];
             }
 
-            function getMinMaxZoom(){
+            function getMinMaxZoom() {
                 return [minZoomLevel, maxZoomLevel]
             }
 
@@ -75,7 +75,7 @@ export default class kortjs extends HTMLElement {
                         const id = `${layer.zoom},${tileX + j + layer.origin.tileX},${tileY + i + layer.origin.tileY}`;
                         const wrappedX = ((tileX + j + layer.origin.tileX) % n + n) % n;
                         const wrappedY = ((tileY + i + layer.origin.tileY) % n + n) % n;
-                        const url = config.getURL([ layer.zoom, wrappedX, wrappedY ]);
+                        const url = config.getURL([layer.zoom, wrappedX, wrappedY]);
                         newTiles.push(id);
                         if (layer.isActive && !layer.tiles.has(id) && !tilesBeingFetched.has(id)) {
                             tilesBeingFetched.add(id);
@@ -126,14 +126,22 @@ export default class kortjs extends HTMLElement {
 
         const map = (() => {
             const viewportOffset = 0;
-            const { width: viewportWidth, height: viewportHeight } = viewportElement.getBoundingClientRect();
-            const viewportHalfWidth = viewportWidth / 2;
-            const viewportHalfHeight = viewportHeight / 2;
+            let { width: viewportWidth, height: viewportHeight } = viewportElement.getBoundingClientRect();
+            let viewportHalfWidth = viewportWidth / 2;
+            let viewportHalfHeight = viewportHeight / 2;
             const tileSize = config.getTileSize();
             const [minZoomLevel, maxZoomLevel] = config.getMinMaxZoom();
             const layers = [];
             let nextZoomLevel;
-
+            
+            const resizeObserver = new ResizeObserver(() => {
+                ({ width: viewportWidth, height: viewportHeight } = viewportElement.getBoundingClientRect());
+                viewportHalfWidth = viewportWidth / 2;
+                viewportHalfHeight = viewportHeight / 2;
+                refresh();
+            })
+            resizeObserver.observe(viewportElement);
+            
             initialize();
             addCenterMarker();
             refresh();
@@ -395,7 +403,7 @@ export default class kortjs extends HTMLElement {
                 return { longitude, latitude }
             }
             function addCenterMarker() {
-                if(slotMarker.assignedNodes()[0]){
+                if (slotMarker.assignedNodes()[0]) {
                     const element = slotMarker.assignedNodes()[0].cloneNode("deep");
                     element.setAttribute("class", "default-marker");
                     viewportElement.append(element);
