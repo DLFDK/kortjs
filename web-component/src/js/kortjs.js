@@ -132,16 +132,18 @@ export default class kortjs extends HTMLElement {
             const tileSize = config.getTileSize();
             const [minZoomLevel, maxZoomLevel] = config.getMinMaxZoom();
             const layers = [];
+            let updateMarkerPosition;
             let nextZoomLevel;
-            
+
             const resizeObserver = new ResizeObserver(() => {
                 ({ width: viewportWidth, height: viewportHeight } = viewportElement.getBoundingClientRect());
                 viewportHalfWidth = viewportWidth / 2;
                 viewportHalfHeight = viewportHeight / 2;
+                updateMarkerPosition();
                 refresh();
             })
             resizeObserver.observe(viewportElement);
-            
+
             initialize();
             addCenterMarker();
             refresh();
@@ -413,6 +415,10 @@ export default class kortjs extends HTMLElement {
                     const offsetY = element.dataset.offsety ? parseFloat(element.dataset.offsety) : -height;
 
                     element.style.transform = `translate3d(${viewportHalfWidth + offsetX}px, ${viewportHalfHeight + offsetY}px, 0px)`;
+
+                    updateMarkerPosition = () => {
+                        element.style.transform = `translate3d(${viewportHalfWidth + offsetX}px, ${viewportHalfHeight + offsetY}px, 0px)`;
+                    }
                 }
             }
             return { move, pinch, addTile, getAbsoluteScale, setAbsoluteScales, zoom, changeZoomLevel }
