@@ -58,7 +58,7 @@ export default class kortjs extends HTMLElement {
         slotMarker.setAttribute("name", "marker");
 
         const style = document.createElement("style");
-        style.textContent = `.viewport{box-sizing:border-box;position:relative;width:100%;height:100%;overflow:hidden;touch-action:none;user-select:none;cursor:grab;background:var(--kortjs-backgroundColor, #dddddd)}.layer{position:absolute}.hidden{opacity:0}.middle{z-index:1}.top{z-index:2}canvas{position:absolute}.attribution-container{position:absolute;bottom:0;right:0;z-index:3;display:flex;gap:4px;padding:2px 6px 6px 6px;background:rgba(255,255,255,.5);border-top-left-radius:4px;font-size:clamp(9px,2vw,13px);margin:0}::slotted(*){z-index:3}::slotted(p){margin:0}slot[name=marker]{display:none}.default-marker{position:absolute;z-index:3;width:48px;height:48px}`;
+        style.textContent = `.viewport{box-sizing:border-box;position:relative;width:100%;height:100%;overflow:hidden;touch-action:none;user-select:none;cursor:grab;background:var(--kortjs-backgroundColor, #dddddd)}.layer{position:absolute;top:0;left:0}.hidden{opacity:0}.middle{z-index:1}.top{z-index:2}canvas{position:absolute}.attribution-container{position:absolute;bottom:0;right:0;z-index:3;display:flex;gap:4px;padding:2px 6px 6px 6px;background:rgba(255,255,255,.5);border-top-left-radius:4px;font-size:clamp(9px,2vw,13px);margin:0}::slotted(*){z-index:3}::slotted(p){margin:0}slot[name=marker]{display:none}.default-marker{position:absolute;z-index:3;width:48px;height:48px}`;
         shadow.append(viewportElement, style);
         viewportElement.append(attributionContainer, slotAttributionIcon, slotMarker);
 
