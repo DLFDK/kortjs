@@ -139,7 +139,9 @@ export default class kortjs extends HTMLElement {
                 ({ width: viewportWidth, height: viewportHeight } = viewportElement.getBoundingClientRect());
                 viewportHalfWidth = viewportWidth / 2;
                 viewportHalfHeight = viewportHeight / 2;
-                updateMarkerPosition();
+                if(updateMarkerPosition){
+                    updateMarkerPosition();
+                }
                 refresh();
             })
             resizeObserver.observe(viewportElement);
