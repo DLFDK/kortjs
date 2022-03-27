@@ -136,6 +136,7 @@ export default class kortjs extends HTMLElement {
             let nextZoomLevel;
 
             const resizeObserver = new ResizeObserver(() => {
+                console.log("Resizing!");
                 ({ width: viewportWidth, height: viewportHeight } = viewportElement.getBoundingClientRect());
                 viewportHalfWidth = viewportWidth / 2;
                 viewportHalfHeight = viewportHeight / 2;
@@ -412,15 +413,13 @@ export default class kortjs extends HTMLElement {
                     element.setAttribute("class", "default-marker");
                     viewportElement.append(element);
 
-                    const { width, height } = element.getBoundingClientRect();
-                    const offsetX = element.dataset.offsetx ? parseFloat(element.dataset.offsetx) : -width / 2;
-                    const offsetY = element.dataset.offsety ? parseFloat(element.dataset.offsety) : -height;
-
-                    element.style.transform = `translate3d(${viewportHalfWidth + offsetX}px, ${viewportHalfHeight + offsetY}px, 0px)`;
-
                     updateMarkerPosition = () => {
+                        const { width, height } = element.getBoundingClientRect();
+                        const offsetX = element.dataset.offsetx ? parseFloat(element.dataset.offsetx) : -width / 2;
+                        const offsetY = element.dataset.offsety ? parseFloat(element.dataset.offsety) : -height;
                         element.style.transform = `translate3d(${viewportHalfWidth + offsetX}px, ${viewportHalfHeight + offsetY}px, 0px)`;
                     }
+                    updateMarkerPosition();
                 }
             }
             return { move, pinch, addTile, getAbsoluteScale, setAbsoluteScales, zoom, changeZoomLevel }
