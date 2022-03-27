@@ -28,14 +28,16 @@
             </svg>
         </kort-js> -->
 
-        <kort-js data-url="https://api.mapbox.com/styles/v1/mapbox/${id}/tiles/${z}/${x}/${y}?${token}" data-id="light-v10" data-token="access_token=pk.eyJ1IjoiZGxmZGsiLCJhIjoiY2wxNXI3YXpnMG16ZjNra2F1MmczcHM2NSJ9.sCGl-WR32fAitrpb5LhrYw" data-tilesize="512" data-set-latitude="55.310160" data-set-longitude="10.792022" data-set-zoom="22">
+        <kort-js id="kortjs" data-url="https://api.mapbox.com/styles/v1/mapbox/${id}/tiles/${z}/${x}/${y}?${token}" data-id="light-v10" data-token="access_token=pk.eyJ1IjoiZGxmZGsiLCJhIjoiY2wxNXI3YXpnMG16ZjNra2F1MmczcHM2NSJ9.sCGl-WR32fAitrpb5LhrYw" data-tilesize="512" data-set-latitude="55.310160" data-set-longitude="10.792022" data-set-zoom="22">
             <p slot="attribution-text">© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong></p>
             <div slot="attribution-icon"></div>
-            <svg slot="marker" part="default-marker" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <svg slot="marker" part="marker" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7zM7 9a5 5 0 0 1 10 0c0 3-3 7-5 10-2-3-5-7-5-10z" />
                 <circle part="circle" cx="12" cy="9" r="2.5" />
             </svg>
         </kort-js>
+
+        <button id="button">Click!</button>
 
         <!-- <kort-js 
             data-url="https://retina-tiles.p.rapidapi.com/local/osm@2x/v1/${z}/${x}/${y}.png?rapidapi-key=${token}"

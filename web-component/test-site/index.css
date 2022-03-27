@@ -10,8 +10,10 @@ body {
 kort-js {
     --kortjs-backgroundColor: white;
     display: block;
-    height: 100%;
+    height: 80%;
     width: 100%;
+    /* transform: scale(0); */
+    display: none;
 }
 
 .attribution-text {
@@ -50,7 +52,7 @@ kort-js::part(attribution-container) {
 .marker {
 }
 
-kort-js::part(center-marker) {
+kort-js::part(marker) {
     fill: teal;
     width: 128px;
     height: 128px;
