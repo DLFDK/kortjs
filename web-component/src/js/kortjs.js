@@ -135,13 +135,17 @@ export default class kortjs extends HTMLElement {
             let nextZoomLevel;
 
             const resizeObserver = new ResizeObserver(() => {
-                ({ width: viewportWidth, height: viewportHeight } = viewportElement.getBoundingClientRect());
+                const { width: newWidth, height: newHeight } = viewportElement.getBoundingClientRect();
+                const deltaWidth = newWidth - viewportWidth;
+                const deltaHeight = newHeight - viewportHeight;
+                viewportWidth = newWidth;
+                viewportHeight = newHeight;
                 viewportHalfWidth = viewportWidth / 2;
                 viewportHalfHeight = viewportHeight / 2;
                 if(updateMarkerPosition){
                     updateMarkerPosition();
                 }
-                refresh();
+                move(deltaWidth / 2, deltaHeight / 2, true);
             })
             resizeObserver.observe(viewportElement);
 
