@@ -13,7 +13,7 @@ kort-js {
     height: 80%;
     width: 100%;
     /* transform: scale(0); */
-    display: none;
+    /* display: none; */
 }
 
 .attribution-text {

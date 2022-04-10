@@ -32,7 +32,6 @@ export default class kortjs extends HTMLElement {
             return { getURL, getTileSize, getCoordinatesAndZoom, getMinMaxZoom };
         })();
 
-
         const shadow = kortjs.attachShadow({ mode: "open" });
         const viewportElement = document.createElement("div");
         viewportElement.setAttribute("class", "viewport");
@@ -136,7 +135,6 @@ export default class kortjs extends HTMLElement {
             let nextZoomLevel;
 
             const resizeObserver = new ResizeObserver(() => {
-                console.log("Resizing!");
                 ({ width: viewportWidth, height: viewportHeight } = viewportElement.getBoundingClientRect());
                 viewportHalfWidth = viewportWidth / 2;
                 viewportHalfHeight = viewportHeight / 2;
@@ -356,7 +354,7 @@ export default class kortjs extends HTMLElement {
 
                         layers[0].tiles.set(id, [canvas, ctx]);
                         canvas.animate(
-                            { opacity: 0, offset: 0 },
+                            { opacity: 1, offset: 0 },
                             { duration: 300 }
                         );
                     } else {
@@ -467,6 +465,7 @@ export default class kortjs extends HTMLElement {
                         velocityY = 0;
 
                         document.addEventListener("pointerup", pointerUp);
+                        document.addEventListener("pointercancel", pointerUp);
                         document.addEventListener("pointermove", pointerMove);
                         cancelDrag = requestAnimationFrame(frameTime => {
                             drag(frameTime, performance.now(), 0, 0);
@@ -505,6 +504,7 @@ export default class kortjs extends HTMLElement {
                         viewportElement.style.cursor = "grab";
                         cancelAnimationFrame(cancelDrag);
                         document.removeEventListener("pointerup", pointerUp);
+                        document.removeEventListener("pointercancel", pointerUp);
                         document.removeEventListener("pointermove", pointerMove);
                         if (Math.sqrt(velocityX ** 2 + velocityY ** 2) > glideStartThreshold) {
                             glideStartTime = performance.now();
