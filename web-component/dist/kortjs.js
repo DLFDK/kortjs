@@ -358,7 +358,7 @@ export default class kortjs extends HTMLElement {
 
                         layers[0].tiles.set(id, [canvas, ctx]);
                         canvas.animate(
-                            { opacity: 1, offset: 0 },
+                            { opacity: 0, offset: 0 },
                             { duration: 300 }
                         );
                     } else {
