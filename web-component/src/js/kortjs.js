@@ -142,7 +142,7 @@ export default class kortjs extends HTMLElement {
                 viewportHeight = newHeight;
                 viewportHalfWidth = viewportWidth / 2;
                 viewportHalfHeight = viewportHeight / 2;
-                if(updateMarkerPosition){
+                if (updateMarkerPosition) {
                     updateMarkerPosition();
                 }
                 move(deltaWidth / 2, deltaHeight / 2, true);
@@ -450,6 +450,11 @@ export default class kortjs extends HTMLElement {
             let isScaling;
             let scaleEnd;
             let doubleTap = [0, 0, 0];
+            const scrollMinThreshold = 10;
+            const scrollMaxThreshold = 80;
+            let scrollThreshold = scrollMinThreshold;
+            let scrollDistance = 0;
+            let scrollTimer;
 
             viewportElement.addEventListener("pointerdown", pointerDown);
             viewportElement.addEventListener("wheel", mouseWheelZoom, { passive: false });
@@ -520,7 +525,6 @@ export default class kortjs extends HTMLElement {
                 }
             }
             function drag(time, previousTime, previousX, previousY) {
-                // Is there a way to get around using startDragX and Y?
                 const dT = time - previousTime;
                 const [pointerX, pointerY] = [...pointers.values()][0];
                 const nextX = pointerX - startDragX;
@@ -599,19 +603,28 @@ export default class kortjs extends HTMLElement {
                 }
             }
             function mouseWheelZoom(event) {
-                event.preventDefault();
+                clearTimeout(scrollTimer);
+                scrollTimer = setTimeout(() => {
+                    scrollThreshold = scrollMinThreshold;
+                    scrollDistance = 0;
+                }, 1000)
 
+                scrollDistance += event.deltaY;
                 let direction;
                 let scaleFactor;
-                if (event.deltaY > 0) {
+                if (scrollDistance > scrollThreshold) {
                     scaleFactor = 0.5;
                     direction = -1;
-                } else {
+                    scrollDistance = 0;
+                    scrollThreshold = scrollMaxThreshold;
+                } else if (scrollDistance < -1 * scrollThreshold) {
                     scaleFactor = 2;
                     direction = 1;
+                    scrollDistance = 0;
+                    scrollThreshold = scrollMaxThreshold;
                 }
 
-                if (map.changeZoomLevel(direction)) {
+                if (direction && map.changeZoomLevel(direction)) {
                     const scaleStart = map.getAbsoluteScale();
                     if (isScaling) {
                         scaleEnd *= scaleFactor;
