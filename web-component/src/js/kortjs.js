@@ -670,17 +670,15 @@ export default class kortjs extends HTMLElement {
     }
 
     connectedCallback() {
-        this.dataset.newAttribute = "Hello";
-        console.log(this);
+        if(this.isConnected){
+            this.dataset.isConnected = "true";
+        } else {
+            this.dataset.isConnected = "false";
+        }
     }
-
+    
     disconnectedCallback() {
-        console.log('Custom square element removed from page.');
+        this.dataset.isConnected = "false";
     }
-
-    adoptedCallback() {
-        console.log('Custom square element moved to new page.');
-    }
-
 }
 customElements.define("kort-js", kortjs);
