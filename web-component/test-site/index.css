@@ -62,3 +62,11 @@ kort-js::part(marker) {
 kort-js::part(circle) {
     /* fill: black; */
 }
+
+kort-js * {
+    display: none;
+}
+
+kort-js[data-is-connected="true"] * {
+    display: revert;
+}

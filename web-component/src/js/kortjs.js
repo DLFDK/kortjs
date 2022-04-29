@@ -301,9 +301,9 @@ export default class kortjs extends HTMLElement {
                 }
                 function updateAttributeCoordinates() {
                     const { longitude, latitude } = getCoordinates();
-                    kortjs.setAttribute("data-get-latitude", latitude);
-                    kortjs.setAttribute("data-get-longitude", longitude);
-                    kortjs.setAttribute("data-get-zoom", layers[0].zoom);
+                    kortjs.dataset.getLatitude = latitude;
+                    kortjs.dataset.getLongitude = longitude;
+                    kortjs.dataset.getZoom = layers[0].zoom;
                 }
             }
             function move(x, y, isRound) {
@@ -667,6 +667,18 @@ export default class kortjs extends HTMLElement {
                 }
             }
         })();
+    }
+
+    connectedCallback() {
+        if(this.isConnected){
+            this.dataset.isConnected = "true";
+        } else {
+            this.dataset.isConnected = "false";
+        }
+    }
+    
+    disconnectedCallback() {
+        this.dataset.isConnected = "false";
     }
 }
 customElements.define("kort-js", kortjs);
