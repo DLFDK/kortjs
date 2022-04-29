@@ -4,11 +4,9 @@ const kortjs = document.getElementById("kortjs");
 let toggle = true;
 
 button.addEventListener("click", ()=>{
-    if(toggle) {
-        kortjs.style.display = "block";
-        toggle = false;
+    if(kortjs.isConnected){
+        kortjs.remove();
     } else {
-        kortjs.style.display = "none";
-        toggle = true;
+        document.body.append(kortjs);
     }
 })
