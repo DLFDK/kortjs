@@ -10,14 +10,14 @@
 -   Image fetching and decoding in a worker ensures good performance and a responsive interface even on lower end devices.
 -   Customization through attributes and slotted elements without extra JavaScript.
 
-Current version (0.1.0) focuses on a location-picker use case. See specifics below.
+The first version (0.1.0) focused on a location-picker use case. See specifics below.
 
 ## :sparkler: Getting started
 
 Include the script in your html:
 
 ```
-<script type="module" src="https://unpkg.com/kortjs@latest/web-component/dist/kortjs.min.js"></script>
+<script defer type="module" src="https://unpkg.com/kortjs@latest/web-component/dist/kortjs.min.js"></script>
 ```
 
 Add the markup:
@@ -39,7 +39,7 @@ npm install kortjs
 
 ## :gear: Customization
 
-The slippy map is customized with data-attributes and slotted elements - no Javascript needed!
+The slippy map is customized with [data-attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-*) and the [`<slot>` element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot) - no Javascript needed!
 
 ### **_Tile provider_**
 
@@ -339,6 +339,31 @@ The color of the map background is styled with the custom property `--kortjs-bac
 ```
 kort-js {
     --kortjs-backgroundColor: white;
+}
+```
+
+</details>
+
+## :bicyclist: Reacting to lifecycle events
+
+The attribute `data-is-connected` on the kortjs-element is set in correspondence with the web component [lifecycle callbacks](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#using_the_lifecycle_callbacks): `connectedCallback` and `disconnectedCallback`.
+
+The `data-is-connected` attribute is added at the first occurence of `connectedCallback` with a value of `true`. 
+
+On `disconnectedCallback` its value is set to `false`.
+
+The state of the kortjs-element can also be accessed in javascript with the native [isConnected](https://developer.mozilla.org/en-US/docs/Web/API/Node/isConnected) property.
+
+<details>
+<summary>Example - Hiding all slotted elements until Kortjs has loaded</summary>
+
+```
+kort-js * {
+    display: none;
+}
+
+kort-js[data-is-connected="true"] * {
+    display: revert;
 }
 ```
 
