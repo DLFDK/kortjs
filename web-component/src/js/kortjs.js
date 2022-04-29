@@ -301,9 +301,9 @@ export default class kortjs extends HTMLElement {
                 }
                 function updateAttributeCoordinates() {
                     const { longitude, latitude } = getCoordinates();
-                    kortjs.setAttribute("data-get-latitude", latitude);
-                    kortjs.setAttribute("data-get-longitude", longitude);
-                    kortjs.setAttribute("data-get-zoom", layers[0].zoom);
+                    kortjs.dataset.getLatitude = latitude;
+                    kortjs.dataset.getLongitude = longitude;
+                    kortjs.dataset.getZoom = layers[0].zoom;
                 }
             }
             function move(x, y, isRound) {
@@ -668,5 +668,19 @@ export default class kortjs extends HTMLElement {
             }
         })();
     }
+
+    connectedCallback() {
+        this.dataset.newAttribute = "Hello";
+        console.log(this);
+    }
+
+    disconnectedCallback() {
+        console.log('Custom square element removed from page.');
+    }
+
+    adoptedCallback() {
+        console.log('Custom square element moved to new page.');
+    }
+
 }
 customElements.define("kort-js", kortjs);
