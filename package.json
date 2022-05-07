@@ -1,6 +1,6 @@
 {
   "name": "kortjs",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "The 4KB slippy map",
   "type": "module",
   "main": "web-component/dist/kortjs.js",
