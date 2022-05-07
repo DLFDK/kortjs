@@ -603,6 +603,7 @@ export default class kortjs extends HTMLElement {
                 }
             }
             function mouseWheelZoom(event) {
+                event.preventDefault();
                 clearTimeout(scrollTimer);
                 scrollTimer = setTimeout(() => {
                     scrollThreshold = scrollMinThreshold;
